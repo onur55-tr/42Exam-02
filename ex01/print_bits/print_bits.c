@@ -1,12 +1,12 @@
 #include <unistd.h>
-void	print_bits(unsigned char octet) {
-	int bits;
-	unsigned char	b;
 
-	bits = 8;
-	while (bits--) {
-		b = (octet >> bits & 1) + '0';
-		write(1, &b, 1);
+void	print_bits(unsigned int octet) {
+	int 			i;
+	unsigned int	bits;
+
+	i = 9;
+	while (--i) {
+		bits = (octet >> i & 1) + '0';
+		write(1, &bits, 1);
 	}
 }
-//int main(void) { print_bits('A'); }

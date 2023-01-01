@@ -1,7 +1,7 @@
 #include <unistd.h>
 
 void last_word(char *s) {
-	char	*lw;
+	char *lw;
 
 	while (*s) {
 		if (*s <= 32 && *(s + 1) > 32)

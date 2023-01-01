@@ -1,26 +1,27 @@
 #include <unistd.h>
+#include <stdio.h>
+void ra(char *s) {
+	int count;
 
-void repeat_alpha(char *s) {
-	int c;
-
-	c = 0;
+	count = 0;
 	while (*s) {
 		if (*s >= 'A' && *s <= 'Z')
-			c = *s - 64;
+			count = *s - 'A' + 1;
 		else if (*s >= 'a' && *s <= 'z')
-			c = *s - 96;
-		while (c)
-		{
+			count = *s - 96;
+		else
 			write(1, &*s, 1);
-			c--;
+		while (count) {
+			write(1, &*s, 1);
+			count--;
 		}
-		c = 1;
 		s++;
 	}
+
 }
 
 int main(int ac, char **av) {
 	if (ac == 2)
-		repeat_alpha(av[1]);
+		ra(av[1]);
 	write(1, "\n", 1);
 }

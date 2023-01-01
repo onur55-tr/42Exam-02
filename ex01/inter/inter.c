@@ -1,30 +1,22 @@
 #include <unistd.h>
 
-int check_doubles(char *s, char c, int pos) {
-	int	i;
+int	iter(char *s1, char c, int i) {
+	int	j;
 
-	i = -1;
-	while (++i < pos)
-		if (s[i] == c)
-			return 0;
-	return 1;
+	j = -1;
+	while (s1[++j] && (j < i || i == -1))
+		if (s1[j] == c)
+			return (1);
+	return (0);
 }
 
-void	inter(char *s, char *s1) {
+void	inter(char *s1, char *s2) {
 	int i;
-	int j;
 
 	i = -1;
-	while (s[++i]) {
-		j = -1;
-		while (s1[++j])
-			if (s[i] == s1[j])
-				if (check_doubles(s, s[i], i))
-				{
-					write(1, &s[i], 1);
-					break ;
-				}
-	}
+	while (s1[++i])
+		if (!iter(s1, s1[i], i) && iter(s2, s1[i], -1))
+			write(1, &s1[i], 1);
 }
 
 int main(int ac, char **av) {
