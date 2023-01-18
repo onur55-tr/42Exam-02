@@ -15,7 +15,7 @@ char *ft_itoa(int n) {
 		*(--r) = '0';
 	bas = (n >= 0) * 2 - 1;
 	while (n) {
-		*(--r) = (n % ( 10 * bas) * a ) + '0';
+		*(--r) = (n % ( 10 * bas) * bas ) + '0';
 		n /= 10;
 	}
 	if (bas < 0)
