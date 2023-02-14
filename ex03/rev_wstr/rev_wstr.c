@@ -1,70 +1,50 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-void	ft_putstr(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-}
-
-char	**ft_split(char *str)
-{
-	int i;
-	int i2;
-	int i3;
+char **ft_split(char *str) {
+	int i = 0;
+	int j = 0;
+	int k;
 	char **tab;
 
-	i = 0;
-	i2 = 0;
-	tab = (char**)malloc(sizeof(char) * 100);
-	while (str[i] != '\0')
-	{
-		if (str[i] > 32)
-		{
-			i3 = 0;
-			tab[i2] = (char*)malloc(sizeof(char) * 100);
+	tab = malloc(sizeof(char *) * 1000);
+	while (str[i] == 32 || str[i] == '\t' || str[i] == '\n')
+		i++;
+	while (str[i]) {
+		if (str[i] > 32) {
+			k = 0;
+			tab[j] = malloc(sizeof(char) * 1000);
 			while (str[i] > 32)
-			{
-				tab[i2][i3] = str[i];
-				i++;
-				i3++;
-			}
-			tab[i2][i3] = '\0';
-			i2++;
+				tab[j][k++] = str[i++];
+			tab[j][k] = '\0';
+			j++;
 		}
 		else
 			i++;
 	}
-	tab[i2] = 0;
-	return (tab);
+	tab[j] = NULL;
+	return tab;
 }
 
-int		main(int ac, char **av)
-{
-	int i;
-	char **words;
+void ft_putstr(char *s) {
+	while (*s)
+		write(1, &*s++, 1);
+}
 
-	i = 0;
-	if (ac == 2)
-	{
-		words = ft_split(av[1]);
-		while (words[i] != 0)
-			i++;
-		i--;
-		while (i >= 0)
-		{
-			ft_putstr(words[i]);
-			if (i > 0)
-				write(1, " ", 1);
-			i--;
-		}
+void	rev_wstr(char *s) {
+	char **rew = ft_split(s);
+	int i = 1;
+	while (rew[i])
+		i++;
+	while (--i >= 0) {
+		ft_putstr(rew[i]);
+		if (i > 0)
+			ft_putstr(" ");
 	}
+}
+
+int main(int ac, char **av) {
+	if (ac == 2)
+		rev_wstr(av[1]);
 	write(1, "\n", 1);
-	return (0);
 }

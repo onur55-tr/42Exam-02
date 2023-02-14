@@ -24,3 +24,4 @@ int main(int ac, char **av) {
 		inter(av[1], av[2]);
 	write(1, "\n", 1);
 }
+
